@@ -16,4 +16,5 @@ spring:
 logging:
   level:
     root: info
-    com.douyuehan.doubao: debug 
+    com.douyuehan.doubao: debug
+

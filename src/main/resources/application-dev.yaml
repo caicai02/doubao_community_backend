@@ -1,6 +1,5 @@
 server:
   port: 8088
-
 web:
   domain: http://localhost
 
@@ -11,8 +10,13 @@ spring:
     password: root
     url: jdbc:mysql://localhost:3306/doubao?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=GMT%2B8
     type: com.zaxxer.hikari.HikariDataSource
+  redis:
+    host: 192.168.128.129
+    port: 6379
+    password: 123456
 #打印sql日志信息
 logging:
   level:
     root: info
     com.douyuehan.doubao: debug
+

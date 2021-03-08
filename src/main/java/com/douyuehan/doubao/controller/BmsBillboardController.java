@@ -25,4 +25,10 @@ public class BmsBillboardController extends BaseController {
                 LambdaQueryWrapper<BmsBillboard>().eq(BmsBillboard::isShow,true));
         return ApiResult.success(list.get(list.size()- 1));
     }
+
+    @GetMapping(value = "/put")
+    public String put(String phone,String phoneCode){
+        return bmsBillboardService.put(phone,phoneCode);
+    }
+
 }
