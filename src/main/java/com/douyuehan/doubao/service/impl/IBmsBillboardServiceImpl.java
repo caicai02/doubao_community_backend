@@ -11,15 +11,4 @@ import org.springframework.stereotype.Service;
 @Service
 public class IBmsBillboardServiceImpl extends ServiceImpl<BmsBillboardMapper, BmsBillboard>
 implements IBmsBillboardService {
-
-    @Autowired
-    private RedisTemplate<Object,Object> redisTemplate;
-
-    @Override
-    public String put(String phone, String phoneCode) {
-        redisTemplate.opsForValue().set(phone,phoneCode);
-        Object o = redisTemplate.opsForValue().get(phone);
-        return String.valueOf(o);
-    }
-
 }

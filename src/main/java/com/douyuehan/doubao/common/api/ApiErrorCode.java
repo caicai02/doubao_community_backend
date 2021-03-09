@@ -10,7 +10,7 @@ public enum ApiErrorCode implements IErrorCode {
     /**
      * 失败
      */
-    FAILED(-1, "操作失败"),
+    FAILED(500, "操作失败"),
     /**
      * 未登录，Token过期
      */

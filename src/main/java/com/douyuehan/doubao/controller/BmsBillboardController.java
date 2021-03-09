@@ -1,7 +1,9 @@
 package com.douyuehan.doubao.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.douyuehan.doubao.common.api.ApiErrorCode;
 import com.douyuehan.doubao.common.api.ApiResult;
+import com.douyuehan.doubao.common.api.IErrorCode;
 import com.douyuehan.doubao.model.entity.BmsBillboard;
 import com.douyuehan.doubao.service.IBmsBillboardService;
 import com.douyuehan.doubao.utils.BaiduSmsComponent;
@@ -34,11 +36,6 @@ public class BmsBillboardController extends BaseController {
         return ApiResult.success(list.get(list.size()- 1));
     }
 
-    @GetMapping(value = "/put")
-    public String put(String phone,String phoneCode){
-        return bmsBillboardService.put(phone,phoneCode);
-    }
-
     /**
      * 发送验证码
      * @param cusPhone
@@ -47,21 +44,22 @@ public class BmsBillboardController extends BaseController {
     @RequestMapping(value = "/sendCode", method = RequestMethod.GET)
     public ApiResult sendCode(String cusPhone) {
         try {
-            System.out.println(PhoneFormatCheckUtils.isChinaPhoneLegal(cusPhone));
             if(!PhoneFormatCheckUtils.isChinaPhoneLegal(cusPhone)){
-                return ApiResult.failed("手机号格式错误");
+                //参数是接口情况，传接口实现类
+                return ApiResult.failed(ApiErrorCode.VALIDATE_FAILED);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         String code = NumberUtils.generateRandomCode(4);
-        redisTemplate.opsForValue().set(cusPhone, code, Long.valueOf(60), TimeUnit.SECONDS);
+        //2分钟后清除验证码
+        redisTemplate.opsForValue().set(cusPhone, code, Long.valueOf(120), TimeUnit.SECONDS);
         String result = BaiduSmsComponent.send(cusPhone, code);
         if (result.equals("fail")) {
             // 如果发送失败就重试
             BaiduSmsComponent.send(cusPhone,code);
         }
-        return ApiResult.success();
+        return ApiResult.success(code);
     }
 
     /**
@@ -74,7 +72,7 @@ public class BmsBillboardController extends BaseController {
         String checkCode = String.valueOf(redisTemplate.opsForValue().get(cusPhone));
         if(StringUtils.isEmpty(checkCode) || !checkCode.equals(code)) return ApiResult.failed("验证码错误,请重新输入");
         //验证成功就删除验证码
-        redisTemplate.delete(cusPhone);
+        //redisTemplate.delete(cusPhone);
         return ApiResult.success(userInfo);
     }
 
