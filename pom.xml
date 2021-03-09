@@ -105,6 +105,13 @@
             <artifactId>bce-java-sdk</artifactId>
             <version>0.10.119</version>
         </dependency>
+        <!-- 根据现有的图片生成高质量的缩略图 -->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.8</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
