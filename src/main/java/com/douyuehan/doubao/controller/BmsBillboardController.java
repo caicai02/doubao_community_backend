@@ -4,12 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.douyuehan.doubao.common.api.ApiResult;
 import com.douyuehan.doubao.model.entity.BmsBillboard;
 import com.douyuehan.doubao.service.IBmsBillboardService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.douyuehan.doubao.utils.BaiduSmsComponent;
+import com.douyuehan.doubao.utils.NumberUtils;
+import com.douyuehan.doubao.utils.PhoneFormatCheckUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/billboard")
@@ -17,6 +22,9 @@ public class BmsBillboardController extends BaseController {
 
     @Resource
     private IBmsBillboardService bmsBillboardService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @GetMapping("/show")
     public ApiResult<BmsBillboard> getNotices(){
@@ -29,6 +37,45 @@ public class BmsBillboardController extends BaseController {
     @GetMapping(value = "/put")
     public String put(String phone,String phoneCode){
         return bmsBillboardService.put(phone,phoneCode);
+    }
+
+    /**
+     * 发送验证码
+     * @param cusPhone
+     * @return
+     */
+    @RequestMapping(value = "/sendCode", method = RequestMethod.GET)
+    public ApiResult sendCode(String cusPhone) {
+        try {
+            System.out.println(PhoneFormatCheckUtils.isChinaPhoneLegal(cusPhone));
+            if(!PhoneFormatCheckUtils.isChinaPhoneLegal(cusPhone)){
+                return ApiResult.failed("手机号格式错误");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String code = NumberUtils.generateRandomCode(4);
+        redisTemplate.opsForValue().set(cusPhone, code, Long.valueOf(60), TimeUnit.SECONDS);
+        String result = BaiduSmsComponent.send(cusPhone, code);
+        if (result.equals("fail")) {
+            // 如果发送失败就重试
+            BaiduSmsComponent.send(cusPhone,code);
+        }
+        return ApiResult.success();
+    }
+
+    /**
+     * 验证码校验成功后登录
+     */
+    @ResponseBody
+    @PostMapping(value = "/login")
+    public ApiResult<BmsBillboard> login(String cusPhone, String code){
+        BmsBillboard userInfo = new BmsBillboard();
+        String checkCode = String.valueOf(redisTemplate.opsForValue().get(cusPhone));
+        if(StringUtils.isEmpty(checkCode) || !checkCode.equals(code)) return ApiResult.failed("验证码错误,请重新输入");
+        //验证成功就删除验证码
+        redisTemplate.delete(cusPhone);
+        return ApiResult.success(userInfo);
     }
 
 }
