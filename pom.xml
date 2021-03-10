@@ -23,6 +23,7 @@
         <jwt.version>0.9.1</jwt.version>
         <emoji-java.version>5.1.1</emoji-java.version>
     </properties>
+
     <dependencies>
 
         <dependency>
@@ -111,16 +112,16 @@
             <artifactId>thumbnailator</artifactId>
             <version>0.4.8</version>
         </dependency>
-        <!--Maven应用整合RabbitMQ-->
+    <!--SpringBoot整合RabbitMQ-->
         <dependency>
-            <groupId>com.rabbitmq</groupId>
-            <artifactId>amqp-client</artifactId>
-            <version>5.7.2</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.amqp</groupId>
-            <artifactId>spring-rabbit</artifactId>
-            <version>1.7.6.RELEASE</version>
+            <artifactId>spring-rabbit-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
