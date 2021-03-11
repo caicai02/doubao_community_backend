@@ -135,6 +135,16 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>sms</groupId>
+            <artifactId>msc</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
     </dependencies>
 

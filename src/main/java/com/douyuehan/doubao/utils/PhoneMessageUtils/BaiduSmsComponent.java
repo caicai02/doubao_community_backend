@@ -1,4 +1,4 @@
-package com.douyuehan.doubao.utils;
+package com.douyuehan.doubao.utils.PhoneMessageUtils;
 
 
 import com.baidubce.auth.DefaultBceCredentials;
@@ -13,7 +13,7 @@ import java.util.Map;
 public class BaiduSmsComponent {
 
     public static final String ACCESS_KEY_ID = "59f8d1be79b34f20bd0ef0773274cfc4";
-    public static final String SECRET_ACCESS_KEY = "";
+    public static final String SECRET_ACCESS_KEY = "35bc0da7e1c9472295c4648ddc06c501";
     public static final String ENDPOINT = "http://smsv3.bj.baidubce.com";
     public static final String SIGNATUREID="sms-sign-lPkNTp18587";
     public static final String TEMPLATE="sms-tmpl-eYtbPR18643";

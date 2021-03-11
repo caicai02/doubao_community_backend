@@ -1,4 +1,4 @@
-package com.douyuehan.doubao.utils;
+package com.douyuehan.doubao.utils.ImageUtils;
 
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Position;

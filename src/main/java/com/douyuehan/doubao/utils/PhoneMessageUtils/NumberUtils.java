@@ -1,4 +1,4 @@
-package com.douyuehan.doubao.utils;
+package com.douyuehan.doubao.utils.PhoneMessageUtils;
 
 import java.math.BigDecimal;
 import java.util.Random;
