@@ -1,17 +1,18 @@
-package com.douyuehan.doubao.rabbitmq.service.impl;
+package com.douyuehan.doubao.rabbitmq.send;
 
-import com.douyuehan.doubao.rabbitmq.service.SendService;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
-
+import java.util.ArrayList;
 import static com.douyuehan.doubao.rabbitmq.config.RabbitMQConfig.*;
 
 @Service("sendService")
 public class SendServiceImpl implements SendService {
+
     @Resource
     private AmqpTemplate amqpTemplate;
+    ArrayList<String> list = new ArrayList<>();
+
 
     @Override
     public void sendDirectMessage(String message) {
@@ -30,4 +31,5 @@ public class SendServiceImpl implements SendService {
         //参数1 交换机 参数2 路由key 参数三 消息
         amqpTemplate.convertAndSend(TOPIC_EXCHANGE,TOPIC_ROUTING_KEY,"这是一个Topic信息");
     }
+
 }

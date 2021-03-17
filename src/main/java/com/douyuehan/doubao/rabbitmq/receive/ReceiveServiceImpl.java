@@ -1,6 +1,5 @@
-package com.douyuehan.doubao.rabbitmq.service.impl;
+package com.douyuehan.doubao.rabbitmq.receive;
 
-import com.douyuehan.doubao.rabbitmq.service.ReceiveService;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;

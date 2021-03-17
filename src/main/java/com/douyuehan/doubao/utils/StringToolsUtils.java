@@ -24,7 +24,6 @@ import java.util.regex.Pattern;
 public class StringToolsUtils {
 
 	/**
-	 *
 	 * @param elements 传进来的数组
 	 * @param size 表示拼接的元素个数
 	 * @param regex 表示分隔符
@@ -61,7 +60,7 @@ public class StringToolsUtils {
 		}
 		return newStr;
 	}
-	
+
 
 	/****
 	 *
@@ -223,8 +222,7 @@ public class StringToolsUtils {
 
 	/**
 	 * @description 多对象全属性判空
-	 * @param obj
-	 *            可变参数
+	 * @param obj 可变参数
 	 * @return boolean 非空返回false
 	 * @author don
 	 * @time 2015年3月18日 下午4:01:33
@@ -273,10 +271,8 @@ public class StringToolsUtils {
 	/**
 	 * @description 单个对象判空
 	 * @param object
-	 * @param isinclude
-	 *            属性包含与否
-	 * @param fields
-	 *            对象的属性名称
+	 * @param isinclude 属性包含与否
+	 * @param fields 对象的属性名称
 	 * @return boolean
 	 * @author don
 	 * @time 2015年3月18日 下午4:33:48
@@ -526,10 +522,7 @@ public class StringToolsUtils {
 	public static boolean isExists(List<int []> list){
 		for (int i = 0; i < list.size(); i++) {
 			for (int j = i + 1; j < list.size(); j++) {
-				if(list.get(i)[0]<list.get(j)[1]
-						&&list.get(i)[0]>list.get(j)[0]
-						|| (list.get(i)[1]<list.get(j)[1]
-						&&list.get(i)[1]>list.get(j)[0])) {
+				if(list.get(i)[0]<list.get(j)[1] && list.get(i)[0]>list.get(j)[0] || (list.get(i)[1]<list.get(j)[1] && list.get(i)[1]>list.get(j)[0])) {
 					return true;
 				}
 			}
@@ -569,9 +562,7 @@ public class StringToolsUtils {
 			return originalStr;
 		}
 		StringBuilder strBuilder= new StringBuilder(originalStr);
-		for(int i = startIndex;
-			i < (endIndex <= (originalStr.length() - 1) ? endIndex : originalStr.length());
-			i ++ ){
+		for(int i = startIndex; i < (endIndex <= (originalStr.length() - 1) ? endIndex : originalStr.length()); i ++ ){
 			strBuilder.setCharAt(i, character);
 		}
 		return strBuilder.toString();
@@ -590,12 +581,11 @@ public class StringToolsUtils {
 	 */
 	public static String getrandom(int c) {
 		String str = "";
-		for (int i = 0; i < c; i++) {// 你想生成几个字符的，就把7改成几，如果改成1,那就生成一个随机字母．
+		for (int i = 0; i < c; i++) {// 你想生成几个字符的，就把c改成几，如果改成1,那就生成一个随机字母．
 			str = str + (char) (Math.random() * 26 + 'A');
 		}
 		return str;
 	}
-
 
 
 	//json转List

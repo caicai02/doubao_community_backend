@@ -1,4 +1,4 @@
-package com.douyuehan.doubao.model.entity;
+package com.douyuehan.doubao.project.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;

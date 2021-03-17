@@ -1,4 +1,4 @@
-package com.douyuehan.doubao.rabbitmq.service;
+package com.douyuehan.doubao.rabbitmq.send;
 
 public interface SendService {
     void sendDirectMessage(String message);

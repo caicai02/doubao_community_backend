@@ -1,13 +1,12 @@
 package com.douyuehan.doubao;
 
-import com.douyuehan.doubao.rabbitmq.service.ReceiveService;
-import com.douyuehan.doubao.rabbitmq.service.SendService;
+import com.douyuehan.doubao.rabbitmq.send.SendService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-@MapperScan("com.douyuehan.doubao.mapper")
+@MapperScan("com.douyuehan.doubao.project.mapper")
 @SpringBootApplication
 public class DoubaoApplication {
 

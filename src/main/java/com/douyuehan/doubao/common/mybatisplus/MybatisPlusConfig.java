@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-@MapperScan("com.douyuehan.doubao.mapper")
+@MapperScan("com.douyuehan.doubao.project.mapper")
 public class MybatisPlusConfig {
 
     /**
